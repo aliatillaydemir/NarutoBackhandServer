@@ -402,33 +402,22 @@ class HeroRepoImpl: HeroRepo {
 
         return ApiResponse(
             success = true,
-            message = "its okay",
+            message = "ok",
             prevPage = calculatePage(page = page)[PREVIOUS_PAGE_KEY],
             nextPage = calculatePage(page = page)[NEXT_PAGE_KEY],
-            heroes = heroes[page]!!
+            heroes = heroes[page]!!,
+            lastUpdated = System.currentTimeMillis()
         )
 
 
     }
 
-    private fun calculatePage(page:Int):Map<String,Int?>{
-        var prevPage: Int? = page
-        var nextPage: Int? = page
+    private fun calculatePage(page:Int) =
+    mapOf(
+        PREVIOUS_PAGE_KEY to if(page in 2..5) page.minus(1) else null,
+        NEXT_PAGE_KEY to if(page in 1..4) page.plus(1) else null
+        )
 
-        if(page in 1..4){
-            nextPage = nextPage?.plus(1)
-        }
-        if(page in 2..4){
-            prevPage = prevPage?.minus(1)
-        }
-        if(page == 1){
-            prevPage = null
-        }
-        if(page==5){
-            nextPage = null
-        }
-        return mapOf(PREVIOUS_PAGE_KEY to prevPage, NEXT_PAGE_KEY to nextPage)
-    }
 
     override suspend fun searchHeroes(name: String?): ApiResponse {
         return ApiResponse(
