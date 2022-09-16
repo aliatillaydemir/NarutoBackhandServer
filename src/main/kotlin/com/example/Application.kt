@@ -9,9 +9,9 @@ fun main(args: Array<String>): Unit =
 @Suppress("unused")
 fun Application.module() {
     configureKoin()  //its called first, cause dep. injec. otherwise we get compile error.
+    configureRouting()
     configureSerialization()
     configureMonitoring()
-    configureRouting()
     configureDefaultHeader()
     configureStatusPages()
 }

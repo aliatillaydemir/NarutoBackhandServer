@@ -8,5 +8,6 @@ data class ApiResponse(  //it's contains hero data class. this class is responsi
     val message: String? = null, //this and other func. are optional.
     val prevPage: Int? = null,   // prev and next page added cause android apps will support  page library. We can use these.
     val nextPage: Int? = null,
-    val heroes: List<Hero> = emptyList()  //hero data class
+    val heroes: List<Hero> = emptyList(),  //hero data class
+    val lastUpdated: Long? = null
 )
